@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+    <!-- add image by local-file -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add_new_image_by_local_file"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:layout_margin="@dimen/dim_general_margin" />
+
+    <!-- add image by camera -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add_new_image_by_camera"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:src="@android:drawable/ic_menu_camera"
+            android:layout_margin="@dimen/dim_general_margin" />
+
+    <!-- show add image by local-file and camera -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_show_add_image_by_many_ways"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:src="@android:drawable/ic_menu_add"
+            android:layout_margin="@dimen/dim_general_margin" />
+</RelativeLayout>
