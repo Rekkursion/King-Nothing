@@ -1,4 +1,4 @@
-package com.rekkursion.kingnothing
+package com.rekkursion.kingnothing.activities
 
 import android.Manifest
 import android.animation.ObjectAnimator
@@ -26,6 +26,9 @@ import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.GridView
 import android.widget.LinearLayout
+import com.rekkursion.kingnothing.R
+import com.rekkursion.kingnothing.adapters.CapturedImageItemAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
 
@@ -205,7 +208,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
     }
 
     private fun goToEditActivity(beEdittedBitmap: Bitmap?) {
-
+        //mGdvCapturedImages.adapter = CapturedImageItemAdapter(this, null)
     }
 
     private fun popUpOrCloseDownNewImageWaysFloatingActionButtons(shouldPopUp: Boolean) {

@@ -6,8 +6,9 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
-    
+        tools:context=".activities.MainActivity">
+
+    <!-- captured images in history -->
     <GridView
             android:id="@+id/gdv_captured_images"
             android:layout_width="match_parent"
