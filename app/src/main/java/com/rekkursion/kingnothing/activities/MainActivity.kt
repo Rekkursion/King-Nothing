@@ -208,7 +208,8 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
     }
 
     private fun goToEditActivity(beEdittedBitmap: Bitmap?) {
-        //mGdvCapturedImages.adapter = CapturedImageItemAdapter(this, null)
+        val intentToEditActivity: Intent = Intent(this, EditActivity::class.java)
+        startActivity(intentToEditActivity)
     }
 
     private fun popUpOrCloseDownNewImageWaysFloatingActionButtons(shouldPopUp: Boolean) {

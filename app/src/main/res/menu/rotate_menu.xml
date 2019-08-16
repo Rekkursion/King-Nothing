@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:id="@+id/rotate_menu_item_turn_left_90"
+            android:title="向左轉 90 度"/>
+
+    <item
+            android:id="@+id/rotate_menu_item_turn_right_90"
+            android:title="向右轉 90 度"/>
+
+    <item
+            android:id="@+id/rotate_menu_item_vertical_flip"
+            android:title="垂直翻轉"/>
+
+    <item
+            android:id="@+id/rotate_menu_item_horizontal_flip"
+            android:title="水平翻轉"/>
+</menu>
