@@ -7,7 +7,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
-
+    
+    <GridView
+            android:id="@+id/gdv_captured_images"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="7"
+            android:verticalSpacing="@dimen/dim_captured_images_grid_view_spacing"
+            android:horizontalSpacing="@dimen/dim_captured_images_grid_view_spacing"
+            android:gravity="center"
+            android:stretchMode="columnWidth" />
+        
     <!-- add image by local-file -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add_new_image_by_local_file"

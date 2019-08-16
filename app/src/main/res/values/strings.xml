@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">King Nothing</string>
+    <string name="str_preview_photo_title">This is the photo you captured.</string>
+    <string name="str_preview_photo_message">Would you like to take this one?</string>
+    <string name="str_user_check_yes">Yes</string>
+    <string name="str_user_check_no">No</string>
+    <string name="str_user_check_recapture">Recapture</string>
 </resources>
