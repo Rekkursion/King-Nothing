@@ -6,7 +6,8 @@
     <!-- for previewing -->
     <ImageView
             android:id="@+id/imgv_color_picker_dialog_preview_color"
-            android:src="@android:color/black"
+            android:src="@android:color/transparent"
+            android:background="@android:color/transparent"
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="100dp" />
@@ -23,6 +24,7 @@
                 android:text="@string/str_red"
                 android:textColor="@color/color_red"
                 android:textAlignment="textStart"
+                android:textStyle="bold"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content" />
         <SeekBar
@@ -35,6 +37,7 @@
                 android:text="000"
                 android:textColor="@color/color_red"
                 android:textAlignment="textEnd"
+                android:textStyle="bold"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content" />
     </LinearLayout>
@@ -51,6 +54,7 @@
                 android:text="@string/str_green"
                 android:textColor="@color/color_green"
                 android:textAlignment="textStart"
+                android:textStyle="bold"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content" />
         <SeekBar
@@ -63,6 +67,7 @@
                 android:text="000"
                 android:textColor="@color/color_green"
                 android:textAlignment="textEnd"
+                android:textStyle="bold"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content" />
     </LinearLayout>
@@ -79,6 +84,7 @@
                 android:text="@string/str_blue"
                 android:textColor="@color/color_blue"
                 android:textAlignment="textStart"
+                android:textStyle="bold"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content" />
         <SeekBar
@@ -91,6 +97,35 @@
                 android:text="000"
                 android:textColor="@color/color_blue"
                 android:textAlignment="textEnd"
+                android:textStyle="bold"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <!-- pick alpha -->
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_margin="@dimen/dim_general_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+                android:text="@string/str_alpha"
+                android:textAlignment="textStart"
+                android:textStyle="bold"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" />
+        <SeekBar
+                android:id="@+id/skb_color_picker_dialog_pick_alpha"
+                android:layout_gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content" />
+        <TextView
+                android:id="@+id/txtv_color_picker_dialog_show_alpha_value"
+                android:text="255"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content" />
     </LinearLayout>
@@ -106,22 +141,24 @@
                 android:id="@+id/btn_color_picker_dialog_cancel"
                 android:text="@string/str_cancel"
                 android:textAllCaps="true"
+                android:textStyle="bold"
                 android:background="?android:attr/selectableItemBackground"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content" />
+                android:layout_height="30dp" />
         <!-- select button -->
         <Button
                 android:id="@+id/btn_color_picker_dialog_select"
                 android:text="@string/str_select"
                 android:textAllCaps="true"
+                android:textStyle="bold"
                 android:background="?android:attr/selectableItemBackground"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content" />
+                android:layout_height="30dp" />
     </LinearLayout>
 </LinearLayout>

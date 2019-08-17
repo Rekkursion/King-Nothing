@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- color-picker-dialog theme -->
     <style name="ColorPickerDialogTheme" parent="android:style/Theme.Dialog">
         <!--背景颜色及和透明程度-->
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -17,8 +18,8 @@
         <item name="android:windowFrame">@null</item>
         <!--是否浮现在activity之上-->
         <item name="android:windowIsFloating">true</item>
-        <!--是否模糊-->
-        <item name="android:backgroundDimEnabled">false</item>
+        <!--是否背景變暗 (Edit: rekkursion, 20190817)-->
+        <item name="android:backgroundDimEnabled">true</item>
     </style>
 
 </resources>
