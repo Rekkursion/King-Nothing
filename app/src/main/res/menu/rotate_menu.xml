@@ -9,6 +9,10 @@
             android:title="向右轉 90 度"/>
 
     <item
+            android:id="@+id/rotate_menu_item_turn_180_degrees"
+            android:title="旋轉 180 度"/>
+
+    <item
             android:id="@+id/rotate_menu_item_vertical_flip"
             android:title="垂直翻轉"/>
 

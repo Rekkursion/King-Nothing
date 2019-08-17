@@ -31,19 +31,29 @@ class EditActivity: AppCompatActivity(), View.OnClickListener {
     private val mOnMenuItemClickListener = PopupMenu.OnMenuItemClickListener { menuItem ->
         when (menuItem.itemId) {
             R.id.rotate_menu_item_turn_left_90 -> {
-                Log.e("pop-up", "turn left 90")
+                ImageProcessManager.addNewProcessedBitmap(ImageProcessFactory.turnLeft90Degrees(ImageProcessManager.getCurrentBitmap()))
+                mImgvMainBitmap.setImageBitmap(ImageProcessManager.getCurrentBitmap())
             }
 
             R.id.rotate_menu_item_turn_right_90 -> {
-                Log.e("pop-up", "turn right 90")
+                ImageProcessManager.addNewProcessedBitmap(ImageProcessFactory.turnRight90Degrees(ImageProcessManager.getCurrentBitmap()))
+                mImgvMainBitmap.setImageBitmap(ImageProcessManager.getCurrentBitmap())
+            }
+
+            R.id.rotate_menu_item_turn_180_degrees -> {
+                Log.e("pop-up", "180 degrees")
+                ImageProcessManager.addNewProcessedBitmap(ImageProcessFactory.turn180Degrees(ImageProcessManager.getCurrentBitmap()))
+                mImgvMainBitmap.setImageBitmap(ImageProcessManager.getCurrentBitmap())
             }
 
             R.id.rotate_menu_item_vertical_flip -> {
-                Log.e("pop-up", "vertical flip")
+                ImageProcessManager.addNewProcessedBitmap(ImageProcessFactory.verticalFlip(ImageProcessManager.getCurrentBitmap()))
+                mImgvMainBitmap.setImageBitmap(ImageProcessManager.getCurrentBitmap())
             }
 
             R.id.rotate_menu_item_horizontal_flip -> {
-                Log.e("pop-up", "horizontal flip")
+                ImageProcessManager.addNewProcessedBitmap(ImageProcessFactory.horizontalFlip(ImageProcessManager.getCurrentBitmap()))
+                mImgvMainBitmap.setImageBitmap(ImageProcessManager.getCurrentBitmap())
             }
 
             else -> {
