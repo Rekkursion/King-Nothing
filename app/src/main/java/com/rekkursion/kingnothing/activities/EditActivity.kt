@@ -1,6 +1,9 @@
 package com.rekkursion.kingnothing.activities
 
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.VectorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,9 +12,12 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.core.graphics.drawable.toBitmap
 import com.rekkursion.kingnothing.ColorPickerDialog
 import com.rekkursion.kingnothing.R
-
+import com.rekkursion.kingnothing.factories.ImageProcessFactory
+import com.rekkursion.kingnothing.singletons.ImageProcessManager
+import kotlinx.android.synthetic.main.activity_edit.*
 
 
 class EditActivity: AppCompatActivity(), View.OnClickListener {
@@ -63,6 +69,7 @@ class EditActivity: AppCompatActivity(), View.OnClickListener {
         mImgbtnColorize.setOnClickListener(this)
 
         mImgvMainBitmap = findViewById(R.id.imgv_main_bitmap)
+        mImgvMainBitmap.setImageBitmap(ImageProcessManager.getCurrentBitmap())
     }
 
     private fun setPopupMenu(view: View): PopupMenu {
@@ -88,7 +95,13 @@ class EditActivity: AppCompatActivity(), View.OnClickListener {
                 colorPickerDialog.setOnColorPickingCancelClickListener("Cancel", null)
                 colorPickerDialog.setOnColorPickingSelectClickListener("Select", object: ColorPickerDialog.OnColorPickingSelectClickListener {
                     override fun onSelectClick(a: Int, r: Int, g: Int, b: Int) {
+                        val original = ImageProcessManager.getCurrentBitmap()
+                        val processed =
+                            if (original == null) null
+                            else ImageProcessFactory.colorCover(original, Color.argb(a, r, g, b))
 
+                        ImageProcessManager.addNewProcessedBitmap(processed)
+                        imgv_main_bitmap.setImageBitmap(processed)
                     }
                 })
                 colorPickerDialog.show()

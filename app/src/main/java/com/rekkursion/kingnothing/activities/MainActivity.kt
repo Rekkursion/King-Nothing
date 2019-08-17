@@ -27,8 +27,7 @@ import android.view.ViewGroup
 import android.widget.GridView
 import android.widget.LinearLayout
 import com.rekkursion.kingnothing.R
-import com.rekkursion.kingnothing.adapters.CapturedImageItemAdapter
-import kotlinx.android.synthetic.main.activity_main.*
+import com.rekkursion.kingnothing.singletons.ImageProcessManager
 import java.io.File
 
 
@@ -78,7 +77,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
                 capturedImageBitmap = BitmapFactory.decodeFile(imgUri.path)
 
                 // go to edit-activity
-                goToEditActivity(capturedImageBitmap)
+                initImageProcessManagerAndGoToEditActivity(capturedImageBitmap)
             }
 
             // back from camera
@@ -133,7 +132,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
                         // yes, edit it
                         .setPositiveButton(R.string.str_user_check_yes) { _, _ ->
                             // go to edit-activity
-                            goToEditActivity(capturedImageBitmap)
+                            initImageProcessManagerAndGoToEditActivity(capturedImageBitmap)
                         }
 
                         // no, do nothing
@@ -207,8 +206,12 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
         startActivityForResult(intentUseCamera, REQ_CODE_USE_CAMERA)
     }
 
-    private fun goToEditActivity(beEdittedBitmap: Bitmap?) {
-        val intentToEditActivity: Intent = Intent(this, EditActivity::class.java)
+    private fun initImageProcessManagerAndGoToEditActivity(beEdittedBitmap: Bitmap?) {
+        if (beEdittedBitmap == null)
+            return
+        ImageProcessManager.initialize(beEdittedBitmap!!)
+
+        val intentToEditActivity = Intent(this, EditActivity::class.java)
         startActivity(intentToEditActivity)
     }
 
