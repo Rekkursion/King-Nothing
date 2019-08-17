@@ -194,7 +194,7 @@ class ColorPickerDialog: Dialog {
 
                 // build a new alert-dialog
                 AlertDialog.Builder(mContext)
-                    .setTitle(colorStr)
+                    .setTitle("$colorStr, current value: ${(view as TextView).text}")
                     .setView(edtInputColorValue)
                     .setPositiveButton("OK") { _, _ ->
                         if (edtInputColorValue.text.length == 0)

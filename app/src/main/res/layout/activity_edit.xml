@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         tools:context=".activities.EditActivity">
 
-    <!-- for putting feature buttons -->
+    <!-- functional feature buttons -->
     <ScrollView
             android:background="@color/colorPrimary"
             android:layout_width="wrap_content"
@@ -41,9 +41,42 @@
         </LinearLayout>
     </ScrollView>
 
-    <ImageView
-            android:id="@+id/imgv_main_bitmap"
-            android:layout_margin="@dimen/dim_general_margin"
+    <!-- undo/redo buttons & main image-view -->
+    <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+        <!-- undo & redo buttons -->
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <!-- undo button -->
+            <Button
+                    android:id="@+id/btn_undo"
+                    android:text="@string/str_undo"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            <!-- redo button -->
+            <Button
+                    android:id="@+id/btn_redo"
+                    android:text="@string/str_redo"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- main image-view to show the editing bitmap -->
+        <ImageView
+                android:id="@+id/imgv_main_bitmap"
+                android:layout_margin="@dimen/dim_general_margin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+    </LinearLayout>
 </LinearLayout>

@@ -1,18 +1,14 @@
 package com.rekkursion.kingnothing.activities
 
-import android.graphics.Bitmap
 import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.VectorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.PopupMenu
-import android.widget.Toast
-import androidx.core.graphics.drawable.toBitmap
 import com.rekkursion.kingnothing.ColorPickerDialog
 import com.rekkursion.kingnothing.R
 import com.rekkursion.kingnothing.factories.ImageProcessFactory
@@ -27,6 +23,9 @@ class EditActivity: AppCompatActivity(), View.OnClickListener {
     private lateinit var mImgbtnColorize: ImageButton
 
     private lateinit var mImgvMainBitmap: ImageView
+
+    private lateinit var mBtnUndo: Button
+    private lateinit var mBtnRedo: Button
 
     private val mOnMenuItemClickListener = PopupMenu.OnMenuItemClickListener { menuItem ->
         when (menuItem.itemId) {
@@ -63,6 +62,14 @@ class EditActivity: AppCompatActivity(), View.OnClickListener {
         true
     }
 
+    private val mOnUndoRedoButtonsClickListener = View.OnClickListener { view ->
+        when (view?.id) {
+            R.id.btn_undo -> ImageProcessManager.undo()
+            R.id.btn_redo -> ImageProcessManager.redo()
+        }
+        mImgvMainBitmap.setImageBitmap(ImageProcessManager.getCurrentBitmap())
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
@@ -80,6 +87,11 @@ class EditActivity: AppCompatActivity(), View.OnClickListener {
 
         mImgvMainBitmap = findViewById(R.id.imgv_main_bitmap)
         mImgvMainBitmap.setImageBitmap(ImageProcessManager.getCurrentBitmap())
+
+        mBtnUndo = findViewById(R.id.btn_undo)
+        mBtnUndo.setOnClickListener(mOnUndoRedoButtonsClickListener)
+        mBtnRedo = findViewById(R.id.btn_redo)
+        mBtnRedo.setOnClickListener(mOnUndoRedoButtonsClickListener)
     }
 
     private fun setPopupMenu(view: View): PopupMenu {

@@ -11,6 +11,10 @@
     <string name="str_green">Green</string>
     <string name="str_blue">Blue</string>
     <string name="str_alpha">Alpha</string>
+
     <string name="str_cancel">Cancel</string>
     <string name="str_select">Select</string>
+
+    <string name="str_undo">Undo</string>
+    <string name="str_redo">Redo</string>
 </resources>
