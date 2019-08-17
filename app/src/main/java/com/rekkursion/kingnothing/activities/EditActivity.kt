@@ -40,8 +40,12 @@ class EditActivity: AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.rotate_menu_item_turn_180_degrees -> {
-                Log.e("pop-up", "180 degrees")
                 ImageProcessManager.addNewProcessedBitmap(ImageProcessFactory.turn180Degrees(ImageProcessManager.getCurrentBitmap()))
+                mImgvMainBitmap.setImageBitmap(ImageProcessManager.getCurrentBitmap())
+            }
+
+            R.id.rotate_menu_item_turn_any_degrees -> {
+                ImageProcessManager.addNewProcessedBitmap(ImageProcessFactory.turnAnyDegrees(ImageProcessManager.getCurrentBitmap(), 45.0))
                 mImgvMainBitmap.setImageBitmap(ImageProcessManager.getCurrentBitmap())
             }
 
