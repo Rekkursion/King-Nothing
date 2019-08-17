@@ -29,16 +29,20 @@
                 android:layout_height="wrap_content" />
         <SeekBar
                 android:id="@+id/skb_color_picker_dialog_pick_red"
+                android:maxHeight="@dimen/dim_color_picker_dialog_seek_bar_max_height"
                 android:layout_gravity="center"
-                android:layout_width="200dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content" />
-        <TextView
-                android:id="@+id/txtv_color_picker_dialog_show_red_value"
+        <Button
+                android:id="@+id/btn_color_picker_dialog_show_red_value"
                 android:text="000"
-                android:textColor="@color/color_red"
-                android:textAlignment="textEnd"
                 android:textStyle="bold"
-                android:layout_width="30dp"
+                android:textColor="@color/color_red"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="@dimen/dim_color_picker_dialog_value_showing_btn_padding"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
     </LinearLayout>
 
@@ -59,16 +63,20 @@
                 android:layout_height="wrap_content" />
         <SeekBar
                 android:id="@+id/skb_color_picker_dialog_pick_green"
+                android:maxHeight="@dimen/dim_color_picker_dialog_seek_bar_max_height"
                 android:layout_gravity="center"
-                android:layout_width="200dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content" />
-        <TextView
-                android:id="@+id/txtv_color_picker_dialog_show_green_value"
+        <Button
+                android:id="@+id/btn_color_picker_dialog_show_green_value"
                 android:text="000"
-                android:textColor="@color/color_green"
-                android:textAlignment="textEnd"
                 android:textStyle="bold"
-                android:layout_width="30dp"
+                android:textColor="@color/color_green"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="@dimen/dim_color_picker_dialog_value_showing_btn_padding"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
     </LinearLayout>
 
@@ -89,16 +97,20 @@
                 android:layout_height="wrap_content" />
         <SeekBar
                 android:id="@+id/skb_color_picker_dialog_pick_blue"
+                android:maxHeight="@dimen/dim_color_picker_dialog_seek_bar_max_height"
                 android:layout_gravity="center"
-                android:layout_width="200dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content" />
-        <TextView
-                android:id="@+id/txtv_color_picker_dialog_show_blue_value"
+        <Button
+                android:id="@+id/btn_color_picker_dialog_show_blue_value"
                 android:text="000"
-                android:textColor="@color/color_blue"
-                android:textAlignment="textEnd"
                 android:textStyle="bold"
-                android:layout_width="30dp"
+                android:textColor="@color/color_blue"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="@dimen/dim_color_picker_dialog_value_showing_btn_padding"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
     </LinearLayout>
 
@@ -118,15 +130,20 @@
                 android:layout_height="wrap_content" />
         <SeekBar
                 android:id="@+id/skb_color_picker_dialog_pick_alpha"
+                android:maxHeight="@dimen/dim_color_picker_dialog_seek_bar_max_height"
                 android:layout_gravity="center"
-                android:layout_width="200dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content" />
-        <TextView
-                android:id="@+id/txtv_color_picker_dialog_show_alpha_value"
+        <Button
+                android:id="@+id/btn_color_picker_dialog_show_alpha_value"
                 android:text="255"
-                android:textAlignment="textEnd"
                 android:textStyle="bold"
-                android:layout_width="30dp"
+                android:textColor="@android:color/darker_gray"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="@dimen/dim_color_picker_dialog_value_showing_btn_padding"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
     </LinearLayout>
 

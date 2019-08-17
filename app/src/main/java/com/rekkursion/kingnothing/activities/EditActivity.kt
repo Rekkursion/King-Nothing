@@ -88,10 +88,7 @@ class EditActivity: AppCompatActivity(), View.OnClickListener {
                 colorPickerDialog.setOnColorPickingCancelClickListener("Cancel", null)
                 colorPickerDialog.setOnColorPickingSelectClickListener("Select", object: ColorPickerDialog.OnColorPickingSelectClickListener {
                     override fun onSelectClick(a: Int, r: Int, g: Int, b: Int) {
-                        
 
-//                        Toast.makeText(this@EditActivity, "($a, $r, $g, $b)", Toast.LENGTH_SHORT).show()
-                        colorPickerDialog.dismiss()
                     }
                 })
                 colorPickerDialog.show()
