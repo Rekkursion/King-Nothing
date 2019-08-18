@@ -1,25 +1,25 @@
 package com.rekkursion.kingnothing.activities
 
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Matrix
+import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.PopupMenu
 import com.rekkursion.kingnothing.ColorPickerDialog
 import com.rekkursion.kingnothing.R
 import com.rekkursion.kingnothing.factories.ImageProcessFactory
 import com.rekkursion.kingnothing.singletons.ImageProcessManager
 import kotlinx.android.synthetic.main.activity_edit.*
-import android.graphics.Bitmap
-
-
+import android.graphics.drawable.GradientDrawable
+import android.text.Layout
+import android.view.Gravity
+import android.view.OrientationEventListener
+import android.view.ViewGroup
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.core.view.setPadding
+import java.util.*
 
 
 class EditActivity: AppCompatActivity(), View.OnClickListener {
@@ -51,8 +51,42 @@ class EditActivity: AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.rotate_menu_item_turn_any_degrees -> {
-                ImageProcessManager.addNewProcessedBitmap(ImageProcessFactory.turnAnyDegrees(ImageProcessManager.getCurrentBitmap(), 45.0F))
-                mImgvMainBitmap.setImageBitmap(ImageProcessManager.getCurrentBitmap())
+                val txtvShowDegree = TextView(this)
+                txtvShowDegree.text = "000 degrees"
+                txtvShowDegree.typeface = Typeface.DEFAULT_BOLD
+                txtvShowDegree.setPadding(20, 0, 0, 0)
+
+                val skbDegree = SeekBar(this)
+                skbDegree.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                skbDegree.max = 360
+                skbDegree.progress = 0
+                skbDegree.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
+                    override fun onProgressChanged(seekBar: SeekBar?, progress: Int, isUser: Boolean) {
+                        txtvShowDegree.text = String.format(Locale.CANADA, "%03d degrees", progress)
+                    }
+
+                    override fun onStopTrackingTouch(p0: SeekBar?) {}
+                    override fun onStartTrackingTouch(p0: SeekBar?) {}
+                })
+
+                val layout = LinearLayout(this)
+                layout.orientation = LinearLayout.HORIZONTAL
+                layout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
+                layout.setPadding(20)
+                layout.gravity = Gravity.CENTER
+                layout.addView(txtvShowDegree)
+                layout.addView(skbDegree)
+
+                AlertDialog.Builder(this)
+                    .setTitle("Range: [0, 360] degrees")
+                    .setView(layout)
+                    .setPositiveButton("OK") { _, _ ->
+                        ImageProcessManager.addNewProcessedBitmap(ImageProcessFactory.turnAnyDegrees(ImageProcessManager.getCurrentBitmap(), skbDegree.progress.toFloat()))
+                        mImgvMainBitmap.setImageBitmap(ImageProcessManager.getCurrentBitmap())
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .create()
+                    .show()
             }
 
             R.id.rotate_menu_item_vertical_flip -> {
