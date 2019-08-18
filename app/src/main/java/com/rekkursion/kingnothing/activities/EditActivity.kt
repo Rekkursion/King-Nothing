@@ -1,6 +1,9 @@
 package com.rekkursion.kingnothing.activities
 
+import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Matrix
+import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +17,9 @@ import com.rekkursion.kingnothing.R
 import com.rekkursion.kingnothing.factories.ImageProcessFactory
 import com.rekkursion.kingnothing.singletons.ImageProcessManager
 import kotlinx.android.synthetic.main.activity_edit.*
+import android.graphics.Bitmap
+
+
 
 
 class EditActivity: AppCompatActivity(), View.OnClickListener {
@@ -45,7 +51,7 @@ class EditActivity: AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.rotate_menu_item_turn_any_degrees -> {
-                ImageProcessManager.addNewProcessedBitmap(ImageProcessFactory.turnAnyDegrees(ImageProcessManager.getCurrentBitmap(), 45.0))
+                ImageProcessManager.addNewProcessedBitmap(ImageProcessFactory.turnAnyDegrees(ImageProcessManager.getCurrentBitmap(), 45.0F))
                 mImgvMainBitmap.setImageBitmap(ImageProcessManager.getCurrentBitmap())
             }
 

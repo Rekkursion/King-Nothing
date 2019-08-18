@@ -1,7 +1,8 @@
 package com.rekkursion.kingnothing.factories
 
-import android.graphics.Bitmap
-import android.graphics.Color
+import android.graphics.*
+import android.graphics.drawable.BitmapDrawable
+import kotlinx.android.synthetic.main.activity_edit.*
 import java.util.*
 import java.util.stream.Collectors
 import kotlin.collections.ArrayList
@@ -39,141 +40,34 @@ object ImageProcessFactory {
         return retBitmap
     }
 
-    fun turnAnyDegrees(origBitmap: Bitmap?, degree: Double): Bitmap? {
+    fun turnAnyDegrees(origBitmap: Bitmap?, degree: Float): Bitmap? {
         if (origBitmap == null)
             return null
 
-        val width: Int = origBitmap.width
-        val height: Int = origBitmap.height
+        val matrix = Matrix()
+        val offsetX = origBitmap.width.toFloat() / 2.0F
+        val offsetY = origBitmap.height.toFloat() / 2.0F
 
-        val radian = (degree * Math.PI) / 180.0
-        val cosVal = cos(radian)
-        val sinVal = sin(radian)
+        matrix.postTranslate(-offsetX, -offsetY)
+        matrix.postRotate(degree)
+        matrix.postTranslate(offsetX, offsetY)
 
-        val newPixelsMap: HashMap<Pair<Int, Int>, ArrayList<Int> > = HashMap()
-        var startX: Int? = null
-        var endX: Int? = null
-        var topY: Int? = null
-        var bottomY: Int? = null
-        var offsetX = 0
-        var offsetY = 0
-
-        for (r in 0 until height) {
-            for (c in 0 until width) {
-                // get the pixel at the original location
-                val origPixel: Int = origBitmap.getPixel(c, r)
-
-                // calculate the new location
-                val newC: Int = (cosVal * c.toDouble() - sinVal * r.toDouble()).toInt()
-                val newR: Int = (sinVal * c.toDouble() + cosVal * r.toDouble()).toInt()
-
-                // put the pixel with new location into the map
-                if (newPixelsMap.containsKey(Pair(newR, newC)))
-                    newPixelsMap[Pair(newR, newC)]?.add(origPixel)
-                else
-                    newPixelsMap[Pair(newR, newC)] = arrayListOf(origPixel)
-
-                // find the range of new bitmap
-                startX = if (startX == null) newC else min(startX, newC)
-                endX = if (endX == null) newC else max(endX, newC)
-                topY = if (topY == null) newR else min(topY, newR)
-                bottomY = if (bottomY == null) newR else max(bottomY, newR)
-            }
-        }
-
-        // assure the ranges are start with 0s
-        offsetX = -startX!!
-        offsetY = -topY!!
-
-        val retBitmap = Bitmap.createBitmap((endX!! - startX!!) + 1, (bottomY!! - topY!!) + 1, Bitmap.Config.ARGB_8888)
-        newPixelsMap.forEach { entry ->
-            val newY: Int = entry.key.first + offsetY
-            val newX = entry.key.second + offsetX
-
-            // this 'if' statement is just yi-fang-wan-yi
-            if (newX in 0 until retBitmap.width && newY in 0 until retBitmap.height) {
-                var avgRed = 0
-                var avgGreen = 0
-                var avgBlue = 0
-                var avgAlpha = 0
-
-                entry.value.forEach { pixel ->
-                    avgRed += Color.red(pixel)
-                    avgGreen += Color.green(pixel)
-                    avgBlue += Color.blue(pixel)
-                    avgAlpha += Color.alpha(pixel)
-                }
-                avgRed = (avgRed.toDouble() / entry.value.size.toDouble()).toInt()
-                avgGreen = (avgGreen.toDouble() / entry.value.size.toDouble()).toInt()
-                avgBlue = (avgBlue.toDouble() / entry.value.size.toDouble()).toInt()
-                avgAlpha = (avgAlpha.toDouble() / entry.value.size.toDouble()).toInt()
-
-                retBitmap.setPixel(newX, newY, Color.argb(avgAlpha, avgRed, avgGreen, avgBlue))
-//                retBitmap.setPixel(newX, newY, entry.value[0])
-            }
-        }
-
-        return retBitmap
+        return Bitmap.createBitmap(origBitmap, 0, 0, origBitmap.width, origBitmap.height, matrix, true)
     }
 
     // turn left the bitmap by 90 degrees
     fun turnLeft90Degrees(origBitmap: Bitmap?): Bitmap? {
-        if (origBitmap == null)
-            return null
-
-        val origWidth: Int = origBitmap.width
-        val origHeight: Int = origBitmap.height
-        val retBitmap: Bitmap = Bitmap.createBitmap(origHeight, origWidth, Bitmap.Config.ARGB_8888)
-
-        for (origR in 0 until origHeight) {
-            for (origC in 0 until origWidth) {
-                val newR = origWidth - origC - 1
-                val newC = origR
-                retBitmap.setPixel(newC, newR, origBitmap.getPixel(origC, origR))
-            }
-        }
-
-        return retBitmap
+        return turnAnyDegrees(origBitmap, -90.0F)
     }
 
     // turn right the bitmap by 90 degrees
     fun turnRight90Degrees(origBitmap: Bitmap?): Bitmap? {
-        if (origBitmap == null)
-            return null
-
-        val origWidth: Int = origBitmap.width
-        val origHeight: Int = origBitmap.height
-        val retBitmap: Bitmap = Bitmap.createBitmap(origHeight, origWidth, Bitmap.Config.ARGB_8888)
-
-        for (origR in 0 until origHeight) {
-            for (origC in 0 until origWidth) {
-                val newR = origC
-                val newC = origHeight - origR - 1
-                retBitmap.setPixel(newC, newR, origBitmap.getPixel(origC, origR))
-            }
-        }
-
-        return retBitmap
+        return turnAnyDegrees(origBitmap, 90.0F)
     }
 
     // turn the bitmap by 180 degrees
     fun turn180Degrees(origBitmap: Bitmap?): Bitmap? {
-        if (origBitmap == null)
-            return null
-
-        val origWidth: Int = origBitmap.width
-        val origHeight: Int = origBitmap.height
-        val retBitmap: Bitmap = Bitmap.createBitmap(origWidth, origHeight, Bitmap.Config.ARGB_8888)
-
-        for (origR in 0 until origHeight) {
-            for (origC in 0 until origWidth) {
-                val newR = origHeight - origR - 1
-                val newC = origWidth - origC - 1
-                retBitmap.setPixel(newC, newR, origBitmap.getPixel(origC, origR))
-            }
-        }
-
-        return retBitmap
+        return turnAnyDegrees(origBitmap, 180.0F)
     }
 
     // flip the bitmap vertically
@@ -181,19 +75,13 @@ object ImageProcessFactory {
         if (origBitmap == null)
             return null
 
-        val origWidth: Int = origBitmap.width
-        val origHeight: Int = origBitmap.height
-        val retBitmap: Bitmap = Bitmap.createBitmap(origWidth, origHeight, Bitmap.Config.ARGB_8888)
+        val matrix = Matrix()
+        val offsetX = origBitmap.width.toFloat() / 2.0F
+        val offsetY = origBitmap.height.toFloat() / 2.0F
 
-        for (origR in 0 until origHeight) {
-            for (origC in 0 until origWidth) {
-                val newR = origHeight - origR - 1
-                val newC = origC
-                retBitmap.setPixel(newC, newR, origBitmap.getPixel(origC, origR))
-            }
-        }
+        matrix.postScale(1.0F, -1.0F, offsetX, offsetY)
 
-        return retBitmap
+        return Bitmap.createBitmap(origBitmap, 0, 0, origBitmap.width, origBitmap.height, matrix, true)
     }
 
     // flip the bitmap horizontally
@@ -201,18 +89,12 @@ object ImageProcessFactory {
         if (origBitmap == null)
             return null
 
-        val origWidth: Int = origBitmap.width
-        val origHeight: Int = origBitmap.height
-        val retBitmap: Bitmap = Bitmap.createBitmap(origWidth, origHeight, Bitmap.Config.ARGB_8888)
+        val matrix = Matrix()
+        val offsetX = origBitmap.width.toFloat() / 2.0F
+        val offsetY = origBitmap.height.toFloat() / 2.0F
 
-        for (origR in 0 until origHeight) {
-            for (origC in 0 until origWidth) {
-                val newR = origR
-                val newC = origWidth - origC - 1
-                retBitmap.setPixel(newC, newR, origBitmap.getPixel(origC, origR))
-            }
-        }
+        matrix.postScale(-1.0F, 1.0F, offsetX, offsetY)
 
-        return retBitmap
+        return Bitmap.createBitmap(origBitmap, 0, 0, origBitmap.width, origBitmap.height, matrix, true)
     }
 }
