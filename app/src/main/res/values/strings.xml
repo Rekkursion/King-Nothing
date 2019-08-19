@@ -11,6 +11,7 @@
     <string name="str_green">Green</string>
     <string name="str_blue">Blue</string>
     <string name="str_alpha">Alpha</string>
+    <string name="str_hex_code">Hex code</string>
 
     <string name="str_cancel">Cancel</string>
     <string name="str_select">Select</string>

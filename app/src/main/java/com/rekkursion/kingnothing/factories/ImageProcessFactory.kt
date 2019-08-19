@@ -40,6 +40,7 @@ object ImageProcessFactory {
         return retBitmap
     }
 
+    // turn any degrees
     fun turnAnyDegrees(origBitmap: Bitmap?, degree: Float): Bitmap? {
         if (origBitmap == null)
             return null
